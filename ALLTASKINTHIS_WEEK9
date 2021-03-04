@@ -1,0 +1,173 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main {
+    static Scanner scan;
+    static Scanner sc;
+    private static String[][] text = new String[14][1];
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+        File file = new File("data.txt");
+        scan = new Scanner(file);
+        int i = 0;
+        while (scan.hasNextLine()) {
+            //text[i] = scan.nextLine().split(" "); //FOR TASK 1: Uncomment, and comment out line under.
+            String[] splitarray = scan.nextLine().split("\\. "); //FOR TASK 2: -||-
+            i++;
+        }
+
+        // todo: print alle ord der starter med det der sendes med som argument,
+        //printWordsStartingWith("Ø");
+        //todo: print alle ord der har præcis det antal bogstaver der sendes med som argument (inkluderer IKKE tal og tegnene '.' og ',')
+        //printWordsOfLength(3);
+
+
+        //test dine metoder ved at kalde dem her:
+
+        //hasWordConsonant(); //Checks if consonant, returns true/false and prints
+        //hasWordDoubleConsonantPrintIf(); //checks if double consonant, return true/false. Prints if true
+
+        //printLongestSentence(); //prints length of all sentences, lastly returns the longest
+        //printPartOfWord("kartoffel",2,4); //Works
+        //printPartOfWord("kartoffel",2,10); //prints substring of string, from starting point and at the length inputted. Error if to long.
+
+        // printIfPalindrome("Den laks skal ned"); //Works
+        //printIfPalindrome("hej med dig"); //Just to check: prints "the word/sentence is not a palindrome"
+
+    }
+
+    private static void printWordsOfLength(int l) {
+        boolean wordisvalid = true;
+
+        for (int i = 0; i < text.length; i++) {
+            for (String s : text[i]) {
+                if (s.length() == l) {
+                    if (s.contains(",") || s.contains(".")) {
+                        wordisvalid = false;
+                    }
+                       /*for (int j = 0; j < s.length(); j++) {
+                           char c = s.charAt(j);
+                           if(c == '.' || c == ','){
+                               wordisvalid = false;	
+                         }
+                     }*/
+                    if (wordisvalid) {
+                        System.out.println(s);
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    private static void printWordsStartingWith(String pattern) {
+
+        for (int i = 0; i < text.length; i++) {
+            for (String s : text[i]) {
+                if (s.startsWith(pattern) || s.startsWith(pattern.toLowerCase())) {
+                    System.out.println(s);
+                }
+            }
+
+        }
+
+    }
+
+    //skriv dine metoder herunder:
+    private static boolean hasWordConsonant() { //Checks if consonant, and prints true/false and the words.
+        boolean isConsonant = false; //Should have just used a void to print. But wanted to check with true/false
+        for (int i = 0; i < text.length; i++) { //Really not a very good solution, but it works.. Kinda
+            for (String s : text[i]) {
+                if (s.contains("b") || s.contains("c") || s.contains("d") || s.contains("f") || s.contains("g") || s.contains("h") || s.contains("j") || s.contains("k") || s.contains("l") || s.contains("m") || s.contains("n") || s.contains("p") || s.contains("q") || s.contains("r") || s.contains("s") || s.contains("t") || s.contains("v") || s.contains("w") || s.contains("x") || s.contains("z")) {
+                    isConsonant = true;
+                }
+                if (s.contains("B") || s.contains("C") || s.contains("D") || s.contains("F") || s.contains("G") || s.contains("H") || s.contains("J") || s.contains("K") || s.contains("L") || s.contains("M") || s.contains("N") || s.contains("P") || s.contains("Q") || s.contains("R") || s.contains("S") || s.contains("T") || s.contains("V") || s.contains("W") || s.contains("X") || s.contains("Z")) {
+                    isConsonant = true;
+                }
+                System.out.println(s);
+                System.out.println(isConsonant);
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasWordDoubleConsonantPrintIf() { // Returns true if double consonant, and prints if true!!
+        boolean isConsonant = false; //Should have just used a void to print. But wanted to check with true/false
+        for (int i = 0; i < text.length; i++) { //Really not a very good solution, but it works.. Kinda
+            for (String s : text[i]) {
+                if (s.contains("bb") || s.contains("cc") || s.contains("dd") || s.contains("ff") || s.contains("gg") || s.contains("hh") || s.contains("jj") || s.contains("kk") || s.contains("ll") || s.contains("mm") || s.contains("nn") || s.contains("pp") || s.contains("qq") || s.contains("rr") || s.contains("ss") || s.contains("tt") || s.contains("vv") || s.contains("ww") || s.contains("xx") || s.contains("zz") || s.contains("BB") || s.contains("CC") || s.contains("DD") || s.contains("FF") || s.contains("GG") || s.contains("HH") || s.contains("JJ") || s.contains("KK") || s.contains("LL") || s.contains("MM") || s.contains("NN") || s.contains("PP") || s.contains("QQ") || s.contains("RR") || s.contains("SS") || s.contains("TT") || s.contains("VV") || s.contains("WW") || s.contains("XX") || s.contains("ZZ")) {
+                    isConsonant = true;
+                    System.out.println(isConsonant);
+                    System.out.println(s);
+                } else {
+                    isConsonant = false;
+                }
+
+            }
+
+        }
+        return isConsonant;
+    }
+
+
+    private static void printLongestSentence() throws FileNotFoundException {
+        String longestSentence = "";
+        String sentence = "";
+        File file = new File("data.txt");
+        sc = new Scanner(file);
+        int i = 0;
+        while (sc.hasNextLine()) { //Splits text at '.'
+            String[] splitarray = sc.nextLine().split("\\. "); //Splits the text when it meets'.'
+            System.out.println("splitarray[i].length()" + splitarray[i].length() + "splitarray[i]" + splitarray[i]); //just to check the length of all of the sentences.
+            if (splitarray[i].length() > longestSentence.length()) {
+                longestSentence = splitarray[i]; //set the longest so far as the longest
+            }
+        }
+        System.out.println("the longest sentence is: " + longestSentence);
+    }
+
+    private static void printPartOfWord(String word,int indexStart,int lEnd) {
+
+        try {
+            if (lEnd<word.length()) { //checks to see if the length is smaller than the max allowed length
+                System.out.println(word.substring(lEnd));
+            }
+            else {
+                System.out.println(word.substring(indexStart, lEnd));
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("The index is out of bounds, should be smaller than : " + word.length()); //Prints the maximum amount for l
+            }
+        }
+
+        private static void printIfPalindrome(String str) {
+        str = str.toLowerCase();
+        String backwardsString = "";
+
+        char[] stringToChar = str.toCharArray();
+
+            System.out.println("Your input was: " + str);
+        for(int i=stringToChar.length-1;i>=0;i--) { //runs through the chararray backwards
+            backwardsString = backwardsString + str.charAt(i);
+            System.out.println("Backwards: "+ stringToChar[i]); //Prints the characters from the string backwards.
+        }
+        if (str.equals(backwardsString)) {
+            System.out.println("the sentence/ the word is a palindrome");
+        } else {
+            System.out.println("The word/sentence is not a palindrome");
+        }
+
+        }
+
+
+
+    }
+
+
+
+
+
+
