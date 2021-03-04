@@ -1,0 +1,102 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main {
+    static Scanner scan;
+    private static String[][] text = new String[14][1];
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+        File file = new File("data.txt");
+        scan = new Scanner(file);
+        int i = 0;
+        while (scan.hasNextLine()) {
+            text[i] = scan.nextLine().split(" ");
+
+            i++;
+        }
+
+        // todo: print alle ord der starter med det der sendes med som argument,
+        //printWordsStartingWith("Ø");
+        //todo: print alle ord der har præcis det antal bogstaver der sendes med som argument (inkluderer IKKE tal og tegnene '.' og ',')
+        //printWordsOfLength(3);
+
+
+        //test dine metoder ved at kalde dem her:
+        hasWordConsonant(); //Checks if consonant, returns true/false and prints
+        hasWordDoubleConsonantPrintIf(); //checks if double consonant, return true/false. Prints if true
+
+    }
+
+    private static void printWordsOfLength(int l) {
+        boolean wordisvalid = true;
+
+        for (int i = 0; i < text.length; i++) {
+            for (String s : text[i]) {
+                if (s.length() == l) {
+                    if (s.contains(",") || s.contains(".")) {
+                        wordisvalid = false;
+                    }
+                    if (wordisvalid) {
+                        System.out.println(s);
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    private static void printWordsStartingWith(String pattern) {
+
+        for (int i = 0; i < text.length; i++) {
+            for (String s : text[i]) {
+                if (s.startsWith(pattern) || s.startsWith(pattern.toLowerCase())) {
+                    System.out.println(s);
+                }
+            }
+
+        }
+
+    }
+
+    //skriv dine metoder herunder:
+    private static boolean hasWordConsonant() { //Checks if consonant, and prints true/false and the words.
+        boolean isConsonant = false; //Should have just used a void to print. But wanted to check with true/false
+        for (int i = 0; i < text.length; i++) { //Really not a very good solution, but it works.. Kinda
+            for (String s : text[i]) {
+                if (s.contains("b") || s.contains("c") || s.contains("d") || s.contains("f") || s.contains("g") || s.contains("h") || s.contains("j") || s.contains("k") || s.contains("l") || s.contains("m") || s.contains("n") || s.contains("p") || s.contains("q") || s.contains("r") || s.contains("s") || s.contains("t") || s.contains("v") || s.contains("w") || s.contains("x") || s.contains("z")) {
+                    isConsonant = true;
+                }
+                if (s.contains("B") || s.contains("C") || s.contains("D") || s.contains("F") || s.contains("G") || s.contains("H") || s.contains("J") || s.contains("K") || s.contains("L") || s.contains("M") || s.contains("N") || s.contains("P") || s.contains("Q") || s.contains("R") || s.contains("S") || s.contains("T") || s.contains("V") || s.contains("W") || s.contains("X") || s.contains("Z")) {
+                    isConsonant = true;
+                }
+                System.out.println(s);
+                System.out.println(isConsonant);
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasWordDoubleConsonantPrintIf() { // Returns true if double consonant, and prints if true!!
+        boolean isConsonant = false; //Should have just used a void to print. But wanted to check with true/false
+        for (int i = 0; i < text.length; i++) { //Really not a very good solution, but it works.. Kinda
+            for (String s : text[i]) {
+                if (s.contains("bb") || s.contains("cc") || s.contains("dd") || s.contains("ff") || s.contains("gg") || s.contains("hh") || s.contains("jj") || s.contains("kk") || s.contains("ll") || s.contains("mm") || s.contains("nn") || s.contains("pp") || s.contains("qq") || s.contains("rr") || s.contains("ss") || s.contains("tt") || s.contains("vv") || s.contains("ww") || s.contains("xx") || s.contains("zz") || s.contains("BB") || s.contains("CC") || s.contains("DD") || s.contains("FF") || s.contains("GG") || s.contains("HH") || s.contains("JJ") || s.contains("KK") || s.contains("LL") || s.contains("MM") || s.contains("NN") || s.contains("PP") || s.contains("QQ") || s.contains("RR") || s.contains("SS") || s.contains("TT") || s.contains("VV") || s.contains("WW") || s.contains("XX") || s.contains("ZZ")) {
+                    isConsonant = true;
+                    System.out.println(isConsonant);
+                    System.out.println(s);
+                } else {
+                    isConsonant= false;
+                }
+
+                }
+
+            }
+        return isConsonant;
+        }
+
+    }
+
+
